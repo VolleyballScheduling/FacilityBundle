@@ -1,11 +1,28 @@
-facilities:
+volleyball_facility_index:
     pattern: /facilities
     defaults: { _controller: VolleyballFacilityBundle:Facility:index }
-facilities_by_region:
+    
+volleyball_facility_by_organization_index:
+    pattern: /organizations/{organization}/facilities
+    defaults: { _controller: VolleyballFacilityBundle:Facility:index }
+    
+volleyball_facility_by_council_index:
+    pattern: /councils/{council}/facilities
+    defaults: { _controller: VolleyballFacilityBundle:Facility:index }
+volleyball_facility_by_council_organization_index:
+    pattern: /organizations/{organization}/{council}facilities
+    defaults: { _controller: VolleyballFacilityBundle:Facility:index }
+facilities_by_region_index:
     pattern: /regions/{region}/facilities
     defaults: { _controller: VolleyballFacilityBundle:Facility:index }
-facilities_by_organization:
-    pattern: /organizations/{organization}/facilities
+facilities_by_region_council_index:
+    pattern: /regions/{region}/facilities
+    defaults: { _controller: VolleyballFacilityBundle:Facility:index }
+facilities_by_region_council_organization_index:
+    pattern: /regions/{region}/facilities
+    defaults: { _controller: VolleyballFacilityBundle:Facility:index }
+facilities_by_region_organization_index:
+    pattern: /regions/{region}/facilities
     defaults: { _controller: VolleyballFacilityBundle:Facility:index }
 facility_show:
     pattern: /facilities/{facility}

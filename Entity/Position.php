@@ -97,40 +97,32 @@ class Position
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Organization", inversedBy="position")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Facility", inversedBy="position")
+     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
      */
-    protected $organization = '';
+    protected $facility = '';
 
     /**
-      * Get organization
+      * Get facility
       *
-      * @return Organization
+      * @return Facility
       */
-    public function getOrganization()
+    public function getFacility()
     {
-        return $this->organization;
+        return $this->facility;
     }
 
     /**
-      * Set organization
+      * Set facility
       *
-      * @param Organization $organization organization
+      * @param Facility $facility facility
       *
-      * @return  Organization
+      * @return  Facility
       */
-    public function setOrganization(Organization $organization)
+    public function setFacility(Facility $facility)
     {
-        $this->organization = $organization;
+        $this->facility = $facility;
 
         return $this;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->attendees = new ArrayCollection();
     }
 }

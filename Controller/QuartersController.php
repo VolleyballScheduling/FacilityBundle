@@ -1,16 +1,16 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
+use \Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use \Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use \Symfony\Component\HttpFoundation\Request;
 
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
+use \Pagerfanta\Pagerfanta;
+use \Pagerfanta\Adapter\DoctrineORMAdapter;
 
-use Volleyball\Bundle\FacilityBundle\Entity\Quarters;
-use Volleyball\Bundle\FacilityBundle\Form\Type\QuartersType;
-use Volleyball\Bundle\UtilityBundle\Controller\UtilityController as Controller;
+use \Volleyball\Bundle\FacilityBundle\Entity\Quarters;
+use \Volleyball\Bundle\FacilityBundle\Form\Type\QuartersType;
+use \Volleyball\Bundle\UtilityBundle\Controller\UtilityController as Controller;
 
 class QuartersController extends Controller
 {
@@ -18,7 +18,7 @@ class QuartersController extends Controller
      * @Route("/", name="volleyball_quarters_index")
      * @Template("VolleyballFacilityBundle:Quarters:index.html.twig")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         // get route name/params to decypher data to delimit by
         $query = $this->get('doctrine')
@@ -40,8 +40,9 @@ class QuartersController extends Controller
      * @Route("/{slug}", name="volleyball_quarters_show")
      * @Template("VolleyballFacilityBundle:Quarters:show.html.twig")
      */
-    public function showAction($slug)
+    public function showAction(Request $request)
     {
+        $slug = $request->getParameter('slug');
         $quarters = $this->getDoctrine()
             ->getRepository('VolleyballFacilityBundle:Quarters')
             ->findOneBySlug($slug);

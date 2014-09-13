@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
 use Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
-use Volleyball\Bundle\UtilityBundle\Entity\Address;
 
 /**
  * @ORM\Entity
@@ -91,7 +90,7 @@ class Facility
      *
      * @return Facility
      */
-    public function setAddress(Address $address)
+    public function setAddress(\Volleyball\Bundle\UtilityBundle\Entity\Address $address)
     {
         $this->address = $address;
 
@@ -121,7 +120,7 @@ class Facility
      *
      * @return Facility
      */
-    public function setOrganization(Organization $organization)
+    public function setOrganization(\Volleyball\Bundle\OrganizationBundle\Entity\Organization $organization)
     {
         $this->organization = $organization;
 
@@ -151,7 +150,7 @@ class Facility
      *
      * @return Leader
      */
-    public function setCouncil(Council $council)
+    public function setCouncil(\Volleyball\Bundle\OrganizationBundle\Entity\Council $council)
     {
         $this->council = $council;
 
@@ -181,7 +180,7 @@ class Facility
      *
      * @return Leader
      */
-    public function setRegion(Region $region)
+    public function setRegion(\Volleyball\Bundle\OrganizationBundle\Entity\Region $region)
     {
         $this->region = $region;
 
@@ -430,7 +429,7 @@ class Facility
      *
      * @return self
      */
-    public function addSeason(Season $season)
+    public function addSeason(\Volleyball\Bundle\EnrollmentBundle\Entity\Season $season)
     {
         if (!in_array($season, $this->seasons)) {
             $this->seasons[] = $season;
@@ -467,7 +466,7 @@ class Facility
      * @param Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters
      * @return Facility
      */
-    public function setQuarters(Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters = null)
+    public function setQuarters(\Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters = null)
     {
         $this->quarters = $quarters;
 

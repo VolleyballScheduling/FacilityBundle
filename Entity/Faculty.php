@@ -125,6 +125,6 @@ class Faculty extends User
             return $this;
         }
 
-        return $thus->admin;
+        return $this->admin;
     }
 }

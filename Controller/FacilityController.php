@@ -3,22 +3,20 @@ namespace Volleyball\Bundle\FacilityBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Request;
-
-use Volleyball\Bundle\FacilityBundle\Entity\Facility;
-use Volleyball\Bundle\FacilityBundle\Form\Type\FacilityType;
-use Volleyball\Bundle\UtilityBundle\Controller\UtilityController as Controller;
-
+use \Symfony\Component\HttpFoundation\Request;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 
-class FacilityController extends Controller
+use Volleyball\Bundle\FacilityBundle\Entity\Facility;
+use Volleyball\Bundle\FacilityBundle\Form\Type\FacilityFormType;
+
+class FacilityController extends \Volleyball\Bundle\UtilityBundle\Controller\UtilityController
 {
     /**
      * @Route("/", name="volleyball_facility_index")
      * @Template("VolleyballFacilityBundle:Facility:index.html.twig")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         // get route name/params to decypher data to delimit by
         $query = $this->get('doctrine')
@@ -31,7 +29,7 @@ class FacilityController extends Controller
         $pager->setCurrentPage($this->getRequest()->get('page', 1));
 
         return array(
-          'facilitys' => $pager->getCurrentPageResults(),
+          'facilities' => $pager->getCurrentPageResults(),
           'pager'  => $pager
         );
     }
@@ -40,8 +38,9 @@ class FacilityController extends Controller
      * @Route("/{slug}", name="volleyball_facility_show")
      * @Template("VolleyballFacilityBundle:Facility:show.html.twig")
      */
-    public function showAction($slug)
+    public function showAction(Request $request)
     {
+        $slug = $request->getParameter('slug');
         $facility = $this->getDoctrine()
             ->getRepository('VolleyballFacilityBundle:Facility')
             ->findOneBySlug($slug);
@@ -65,7 +64,7 @@ class FacilityController extends Controller
     public function newAction(Request $request)
     {
         $facility = new Facility();
-        $form = $this->createForm(new FacilityType(), $facility);
+        $form = $this->createForm(new FacilityFormType(), $facility);
 
         if ("POST" == $request->getMethod()) {
             $form->handleRequest($this->getRequest());
