@@ -1,7 +1,21 @@
-parameters:
-#    Volleyball_facility.example.class: Volleyball\FacilityBundle\Example
-
 services:
-#    Volleyball_facility.example:
-#        class: %Volleyball_facility.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    volleyball.controller.department:
+        class: Volleyball\Bundle\FacilityBundle\Controller\DepartmentController
+        factory_service: sylius.controller.configuration_factory
+        factory_method: createConfiguration
+        arguments: ["sylius", "department", "VolleyballFacilityBundle:Department"]
+    volleyball.controller.facility:
+        class: Volleyball\Bundle\FacilityBundle\Controller\FacilityController
+        factory_service: sylius.controller.configuration_factory
+        factory_method: createConfiguration
+        arguments: ["sylius", "facility", "VolleyballFacilityBundle:Facility"]
+    volleyball.controller.faculty:
+        class: Volleyball\Bundle\FacilityBundle\Controller\FacultyController
+        factory_service: sylius.controller.configuration_factory
+        factory_method: createConfiguration
+        arguments: ["sylius", "faculty", "VolleyballFacilityBundle:Faculty"]
+    volleyball.controller.quarters:
+        class: Volleyball\Bundle\FacilityBundle\Controller\QuartersController
+        factory_service: sylius.controller.configuration_factory
+        factory_method: createConfiguration
+        arguments: ["sylius", "quarters", "VolleyballFacilityBundle:Quarters"]

@@ -1,9 +1,35 @@
 <?php
-
 namespace Volleyball\Bundle\FacilityBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use \Symfony\Component\DependencyInjection\ContainerBuilder;
+use \Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use \Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
-class VolleyballFacilityBundle extends Bundle
+class VolleyballFacilityBundle extends AbstractResourceBundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSupportedDrivers()
+    {
+        return array(
+            SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+        );
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function getBundlePrefix()
+    {
+        return 'volleyball_facility';
+    }
 }
