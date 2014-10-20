@@ -1,12 +1,6 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-class QuartersRepository extends EntityRepository
+class QuartersRepository extends \Volleyball\Bundle\UtilityBundle\Doctrine\ORM\EntityRepository
 {
-    public function filterByType($type = 'passel')
-    {
-        return null;
-    }
 }

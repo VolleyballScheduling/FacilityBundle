@@ -1,19 +1,19 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
+use \Doctrine\ORM\Mapping as ORM;
+use \Gedmo\Mapping\Annotation as Gedmo;
+use \Symfony\Component\Validator\Constraints as Assert;
+use \Doctrine\Common\Collections\ArrayCollection;
 
-use Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
-use Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
+use \Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
+use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Table(name="facility_position")
  * @ORM\Entity(repositoryClass="Volleyball\Bundle\FacilityBundle\Repository\PositionRepository")
  */
-class Position
+class Position implements \Volleyball\Component\Facility\Interfaces\PositionInterface
 {
     use SluggableTrait;
     use TimestampableTrait;
@@ -26,6 +26,26 @@ class Position
     protected $id;
 
     /**
+     * Name
+     * @var  string name
+     * @ORM\Column(name="name", type="string")
+     */
+    protected $name = '';
+    
+    /**
+     * Description
+     * @var string
+     * @ORM\Clumn(name="description", type="string")
+     */
+    protected $description = '';
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Facility", inversedBy="facility_positionspositions")
+     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
+     */
+    protected $facility = '';
+    
+    /**
      * Get id
      *
      * @return integer
@@ -36,16 +56,7 @@ class Position
     }
 
     /**
-     * Name
-     * @var  string name
-     * @ORM\Column(name="name", type="string")
-     */
-    protected $name = '';
-
-    /**
-     * Get name
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getName()
     {
@@ -53,11 +64,7 @@ class Position
     }
 
     /**
-     * Set name
-     *
-     * @param string $name name
-     *
-     * @return self
+     * @inheritdoc
      */
     public function setName($name)
     {
@@ -67,15 +74,7 @@ class Position
     }
 
     /**
-     * Description
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * Get description
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getDescription()
     {
@@ -83,11 +82,7 @@ class Position
     }
 
     /**
-     * Set description
-     *
-     * @param string $description description
-     *
-     * @return string
+     * @inheritdoc
      */
     public function setDescription($description)
     {
@@ -97,29 +92,17 @@ class Position
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Facility", inversedBy="position")
-     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
+     * @inheritdoc
      */
-    protected $facility = '';
-
-    /**
-      * Get facility
-      *
-      * @return Facility
-      */
     public function getFacility()
     {
         return $this->facility;
     }
 
     /**
-      * Set facility
-      *
-      * @param Facility $facility facility
-      *
-      * @return  Facility
-      */
-    public function setFacility(Facility $facility)
+     * @inheritdoc
+     */
+    public function setFacility(\Volleyball\Bundle\FacilityBundle\Entity\Facility $facility)
     {
         $this->facility = $facility;
 

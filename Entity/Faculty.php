@@ -1,12 +1,10 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
-use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
-
-use Volleyball\Bundle\UserBundle\Entity\User;
+use \Doctrine\ORM\Mapping as ORM;
+use \Gedmo\Mapping\Annotation as Gedmo;
+use \Symfony\Component\Validator\Constraints as Assert;
+use \PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
@@ -14,18 +12,34 @@ use Volleyball\Bundle\UserBundle\Entity\User;
  * @UniqueEntity(fields = "username", targetClass = "Volleyball\Bundle\UserBundle\Entity\User", message="fos_user.username_already")
  * @UniqueEntity(fields = "email", targetClass = "Volleyball\Bundle\UserBundle\Entity\User", message="fos_user.email_already")
  */
-class Faculty extends User
+class Faculty extends\Volleyball\Bundle\UserBundle\Entity\User implements \Volleyball\Component\Facility\Interfaces\FacultyInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Position", inversedBy="faculty")
      * @ORM\JoinColumn(name="position_id", referencedColumnName="id")
      */
     protected $position;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Facility", inversedBy="facility")
+     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
+     */
+    protected $facility;
+    
+    /**
+     * Admin - if true, user can make limited changes to the passel
+     * @var boolean
+     */
+    protected $admin = false;
+    
+    /**
+     * Quarters
+     * @var \Volleyball\Bundle\FacilityBundle\Entity\FacultyQuarters 
+     */
+    protected $quarters;
 
     /**
-     * Get position
-     *
-     * @return Position
+     * @inheritdoc
      */
     public function getPosition()
     {
@@ -33,11 +47,7 @@ class Faculty extends User
     }
 
     /**
-     * Set position
-     *
-     * @param Position $position position
-     *
-     * @return Faculty
+     * @inheritdoc
      */
     public function setPosition(Position $position)
     {
@@ -47,15 +57,7 @@ class Faculty extends User
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Facility", inversedBy="facility")
-     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
-     */
-    protected $facility;
-
-    /**
-     * Get facility
-     *
-     * @return Facility
+     * @inheritdoc
      */
     public function getFacility()
     {
@@ -63,11 +65,7 @@ class Faculty extends User
     }
 
     /**
-     * Set facility
-     *
-     * @param Facility $facility facility
-     *
-     * @return Faculty
+     * @inheritdoc
      */
     public function setFacility(Facility $facility)
     {
@@ -76,12 +74,8 @@ class Faculty extends User
         return $this;
     }
 
-    protected $quarters;
-
     /**
-     * Get quarters
-     *
-     * @return Quarters
+     * @inheritdoc
      */
     public function getQuarters($type)
     {
@@ -89,11 +83,7 @@ class Faculty extends User
     }
 
     /**
-     * Set quarters
-     *
-     * @param Quarters $quarters quarters
-     *
-     * @return Faculty
+     * @inheritdoc
      */
     public function setQuarters(Quarters $quarters)
     {
@@ -102,20 +92,8 @@ class Faculty extends User
         return $this;
     }
 
-    protected $quarters_types = array();
-
     /**
-     * Admin - if true, user can make limited changes to the passel
-     * @var boolean
-     */
-    protected $admin = false;
-
-    /**
-     * Is admin
-     *
-     * @param boolean $admin admin
-     *
-     * @return boolean|Faculty
+     * @inheritdoc
      */
     public function isAdmin($admin = null)
     {

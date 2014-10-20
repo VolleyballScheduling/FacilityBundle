@@ -1,8 +1,6 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-class PositionRepository extends EntityRepository
+class PositionRepository extends \Volleyball\Bundle\UtilityBundle\Doctrine\ORM\EntityRepository
 {
 }

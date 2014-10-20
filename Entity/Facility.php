@@ -1,22 +1,21 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
+use \Doctrine\ORM\Mapping as ORM;
+use \Gedmo\Mapping\Annotation as Gedmo;
+use \Symfony\Component\Validator\Constraints as Assert;
+use \Doctrine\Common\Collections\ArrayCollection;
 
-use Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
-use Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
+use \Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
+use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="facility")
  */
-class Facility
+class Facility implements \Volleyball\Component\Facility\Interfaces\FacilityInterface
 {
     use SluggableTrait;
-
     use TimestampableTrait;
 
     /**
@@ -25,6 +24,60 @@ class Facility
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * Name
+     * @var  string name
+     * @ORM\Column(name="name", type="string")
+     */
+    protected $name = '';
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\UtilityBundle\Entity\Address", inversedBy="facility")
+     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
+     */
+    protected $address;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Organization", inversedBy="facility")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
+     */
+    protected $organization;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Council", inversedBy="facility")
+     * @ORM\JoinColumn(name="council_id", referencedColumnName="id")
+     */
+    protected $council;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Region", inversedBy="facility")
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     */
+    protected $region;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Faculty", mappedBy="facility")
+     */
+    protected $faculty;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Quarters", inversedBy="facility")
+     * @ORM\JoinColumn(name="quarters_id", referencedColumnName="id")
+     */
+    protected $quarters;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Department", inversedBy="facility")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    protected $departments;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\EnrollmentBundle\Entity\Season", inversedBy="facility")
+     * @ORM\JoinColumn(name="season_id", referencedColumnName="id")
+     */
+    protected $seasons;
 
     /**
      * Get id
@@ -37,16 +90,7 @@ class Facility
     }
 
     /**
-     * Name
-     * @var  string name
-     * @ORM\Column(name="name", type="string")
-     */
-    protected $name = '';
-
-    /**
-     * Get name
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getName()
     {
@@ -54,11 +98,7 @@ class Facility
     }
 
     /**
-     * Set name
-     *
-     * @param string $name name
-     *
-     * @return self
+     * @inheritdoc
      */
     public function setName($name)
     {
@@ -68,15 +108,7 @@ class Facility
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\UtilityBundle\Entity\Address", inversedBy="facility")
-     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
-     */
-    protected $address;
-
-    /**
-     * Get address
-     *
-     * @return Address
+     * @inheritdoc
      */
     public function getAddress()
     {
@@ -84,11 +116,7 @@ class Facility
     }
 
     /**
-     * Set address
-     *
-     * @param Address $address address
-     *
-     * @return Facility
+     * @inheritdoc
      */
     public function setAddress(\Volleyball\Bundle\UtilityBundle\Entity\Address $address)
     {
@@ -98,15 +126,7 @@ class Facility
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Organization", inversedBy="facility")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
-     */
-    protected $organization;
-
-    /**
-     * Get organization
-     *
-     * @return Organization
+     * @inheritdoc
      */
     public function getOrganization()
     {
@@ -114,11 +134,7 @@ class Facility
     }
 
     /**
-     * Set organization
-     *
-     * @param Organization $organization organization
-     *
-     * @return Facility
+     * @inheritdoc
      */
     public function setOrganization(\Volleyball\Bundle\OrganizationBundle\Entity\Organization $organization)
     {
@@ -128,15 +144,7 @@ class Facility
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Council", inversedBy="facility")
-     * @ORM\JoinColumn(name="council_id", referencedColumnName="id")
-     */
-    protected $council;
-
-    /**
-     * Get council
-     *
-     * @return Council
+     * @inheritdoc
      */
     public function getCouncil()
     {
@@ -144,11 +152,7 @@ class Facility
     }
 
     /**
-     * Set council
-     *
-     * @param Council $council council
-     *
-     * @return Leader
+     * @inheritdoc
      */
     public function setCouncil(\Volleyball\Bundle\OrganizationBundle\Entity\Council $council)
     {
@@ -158,15 +162,7 @@ class Facility
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Region", inversedBy="facility")
-     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
-     */
-    protected $region;
-
-    /**
-     * Get region
-     *
-     * @return Region
+     * @inheritdoc
      */
     public function getRegion()
     {
@@ -174,11 +170,7 @@ class Facility
     }
 
     /**
-     * Set region
-     *
-     * @param Region $region region
-     *
-     * @return Leader
+     * @inheritdoc
      */
     public function setRegion(\Volleyball\Bundle\OrganizationBundle\Entity\Region $region)
     {
@@ -188,16 +180,7 @@ class Facility
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="Faculty", mappedBy="facility")
-     */
-    protected $faculty;
-
-    /**
-     * Set faculty
-     *
-     * @param array $faculty faculty
-     *
-     * @return self
+     * @inheritdoc
      */
     public function setFaculty(array $faculty)
     {
@@ -221,11 +204,7 @@ class Facility
     }
 
     /**
-     * Get an faculty
-     *
-     * @param Faculty|String $faculty faculty
-     *
-     * @return Faculty
+     * @inheritdoc
      */
     public function getFaculty($faculty = null)
     {
@@ -237,13 +216,9 @@ class Facility
     }
 
     /**
-     * Add an faculty
-     *
-     * @param Faculty $faculty faculty
-     *
-     * @return self
+     * @inheritdoc
      */
-    public function addFaculty(Faculty $faculty)
+    public function addFaculty(\Volleyball\Bundle\FacilityBundle\Entity\Faculty $faculty)
     {
         $this->faculty->add($faculty);
 
@@ -251,7 +226,7 @@ class Facility
     }
 
     /**
-     * Remove an faculty
+     * Remove a faculty
      *
      * @param Faculty|String $faculty faculty
      *
@@ -265,33 +240,37 @@ class Facility
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Quarters", inversedBy="facility")
-     * @ORM\JoinColumn(name="quarters_id", referencedColumnName="id")
+     * @inheritdoc
      */
-    protected $quarters;
-
-    /**
-     * @param string $type type
-     */
-    public function getQuarters($type = null)
+    public function getQuarters($quarters = null, $type = null)
     {
+        if (null != $quarters) {
+            return $this->quarters->get($quarters);
+        }
+        
         if (null != $type) {
-            return $this->quarters->filterByType($type);
+            return $this->quarters->filter(
+                function($entry) use($type) {
+                    return in_array($entry->getType(), array($type));
+                }
+            );
         }
 
         return $this->quarters;
     }
-
+    
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Department", inversedBy="facility")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @inheritdoc
      */
-    protected $departments;
+    public function setQuarters(\Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters = null)
+    {
+        $this->quarters = $quarters;
+
+        return $this;
+    }
 
     /**
-     * Get departments
-     *
-     * @return ArrayCollection
+     * @inheritdoc
      */
     public function getDepartments()
     {
@@ -299,11 +278,7 @@ class Facility
     }
 
     /**
-     * Set departments
-     *
-     * @param array $departments departments
-     *
-     * @return self
+     * @inheritdoc
      */
     public function setDepartments(array $departments)
     {
@@ -327,11 +302,7 @@ class Facility
     }
 
     /**
-     * Get a department
-     *
-     * @param Department|String $department department
-     *
-     * @return Department
+     * @inheritdoc
      */
     public function getDepartment($department)
     {
@@ -339,11 +310,7 @@ class Facility
     }
 
     /**
-     * Add a department
-     *
-     * @param Department $department department
-     *
-     * @return self
+     * @inheritdoc
      */
     public function addDepartment(Department $department)
     {
@@ -367,15 +334,7 @@ class Facility
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\EnrollmentBundle\Entity\Season", inversedBy="facility")
-     * @ORM\JoinColumn(name="season_id", referencedColumnName="id")
-     */
-    protected $seasons;
-
-    /**
-     * Get seasons
-     *
-     * @return ArrayCollection
+     * @inheritdoc
      */
     public function getSeasons()
     {
@@ -383,11 +342,7 @@ class Facility
     }
 
     /**
-     * Set seasons
-     *
-     * @param array $seasons seasons
-     *
-     * @return self
+     * @inheritdoc
      */
     public function setSeasons(array $seasons)
     {
@@ -411,11 +366,7 @@ class Facility
     }
 
     /**
-     * Get a season
-     *
-     * @param Season|String $season season
-     *
-     * @return Season
+     * @inheritdoc
      */
     public function getSeason($season)
     {
@@ -423,11 +374,7 @@ class Facility
     }
 
     /**
-     * Add a season
-     *
-     * @param Season $season season
-     *
-     * @return self
+     * @inheritdoc
      */
     public function addSeason(\Volleyball\Bundle\EnrollmentBundle\Entity\Season $season)
     {
@@ -453,23 +400,10 @@ class Facility
     }
 
     /**
-     * Constructor
+     * Construct
      */
     public function __construct()
     {
         $this->faculty = new ArrayCollection();
-    }
-
-    /**
-     * Set quarters
-     *
-     * @param Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters
-     * @return Facility
-     */
-    public function setQuarters(\Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters = null)
-    {
-        $this->quarters = $quarters;
-
-        return $this;
     }
 }

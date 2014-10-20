@@ -2,21 +2,21 @@
 
 namespace Volleyball\Bundle\FacilityBundle\Form\Type;
 
-use Symfony\Component\Form\FormBuilderInterface,
-    FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use ,
 
-class RegistrationFacultyFormType extends BaseType
+
+class FacultyRegistrationFormType extends \FOS\UserBundle\Form\Type\RegistrationFormType
 {
-    public function buildForm( FormBuilderInterface $builder, array $options )
+    public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm( $builder, $options );
+        parent::buildForm($builder, $options);
 
         // add your custom field
         $builder->add('quarters',
                       'entity',
                       array(
                         'property'  =>  'name',
-                        'class'     => 'Volleyball\Bundle\FacilityBundle\Entity\Quarters',
+                        'class'     => 'Volleyball\Bundle\FacilityBundle\Entity\FacultyQuarters',
                         'required'  => false
         ) );
     }
