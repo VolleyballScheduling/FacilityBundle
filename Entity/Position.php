@@ -35,7 +35,7 @@ class Position implements \Volleyball\Component\Facility\Interfaces\PositionInte
     /**
      * Description
      * @var string
-     * @ORM\Clumn(name="description", type="string")
+     * @ORM\Column(name="description", type="string")
      */
     protected $description = '';
     

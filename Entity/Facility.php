@@ -262,10 +262,24 @@ class Facility implements \Volleyball\Component\Facility\Interfaces\FacilityInte
     /**
      * @inheritdoc
      */
-    public function setQuarters(\Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters = null)
+    public function setQuarters(array $quarters)
     {
+        if (!$quarters instanceof ArrayCollection) {
+            $quarters = new ArrayCollection($quarters);
+        }
+        
         $this->quarters = $quarters;
 
+        return $this;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function addQuarters(Quarters $quarters)
+    {
+        $this->quarters[] = $quarters;
+        
         return $this;
     }
 

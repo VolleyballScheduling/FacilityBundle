@@ -160,4 +160,22 @@ class Quarters implements \Volleyball\Component\Facility\Interfaces\QuartersInte
     {
         return $this->facility;
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        
+        return $this;
+    }
 }
