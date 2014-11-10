@@ -11,6 +11,16 @@ use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
 /**
  * @ORM\Entity
  * @ORM\Table(name="quarters")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="kind", type="string")
+ * @ORM\DiscriminatorMap(
+ *      {
+ *          "attendee_quarters" = "\Volleyball\Bundle\FacilityBundle\Entity\AttendeeQuarters",
+ *          "faculty_quarters" = "\Volleyball\Bundle\FacilityBundle\Entity\FacultyQuarters",
+ *          "passel_quarters" = "\Volleyball\Bundle\FacilityBundle\Entity\PasselQuarters",
+ *          "quarters"  = "\Volleyball\Bundle\FacilityBundle\Entity\Quarters"
+ *      }
+ * )
  */
 class Quarters implements \Volleyball\Component\Facility\Interfaces\QuartersInterface
 {

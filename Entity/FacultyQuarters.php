@@ -1,10 +1,18 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-class FacultyQuaters extends Quarters
+use \Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="faculty_quarters")
+ */
+class FacultyQuarters extends \Volleyball\Bundle\FacilityBundle\Entity\Quarters
 {
     public function __construct()
     {
+        parent::construct();
+        
         $this->setType('faculty');
     }
 }
