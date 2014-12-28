@@ -12,7 +12,7 @@ use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
  * @ORM\Entity
  * @ORM\Table(name="department")
  */
-class Department implements \Volleyball\Component\Facility\Interfaces\DepartmentInterface
+class Department
 {
     use SluggableTrait;
     use TimestampableTrait;

@@ -9,10 +9,18 @@ use \PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="faculty")
- * @UniqueEntity(fields = "username", targetClass = "Volleyball\Bundle\UserBundle\Entity\User", message="fos_user.username_already")
- * @UniqueEntity(fields = "email", targetClass = "Volleyball\Bundle\UserBundle\Entity\User", message="fos_user.email_already")
+ * @UniqueEntity(
+ *  fields = "username",
+ *  targetClass = "Volleyball\Bundle\UserBundle\Entity\User",
+ *  message="fos_user.username_already"
+ * )
+ * @UniqueEntity(
+ *  fields = "email",
+ *  targetClass = "Volleyball\Bundle\UserBundle\Entity\User",
+ *  message="fos_user.email_already"
+ * )
  */
-class Faculty extends\Volleyball\Bundle\UserBundle\Entity\User implements \Volleyball\Component\Facility\Interfaces\FacultyInterface
+class Faculty extends \Volleyball\Bundle\UserBundle\Entity\User
 {
     /**
      * @var integer $id

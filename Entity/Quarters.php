@@ -22,7 +22,7 @@ use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
  *      }
  * )
  */
-class Quarters implements \Volleyball\Component\Facility\Interfaces\QuartersInterface
+class Quarters
 {
     use SluggableTrait;
     use TimestampableTrait;
