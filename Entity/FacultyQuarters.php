@@ -1,12 +1,6 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use \Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity
- * @ORM\Table(name="faculty_quarters")
- */
 class FacultyQuarters extends \Volleyball\Bundle\FacilityBundle\Entity\Quarters
 {
     public function __construct()

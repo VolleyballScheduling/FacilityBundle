@@ -1,0 +1,68 @@
+\Volleyball\Bundle\FacilityBundle\Entity\Quarters:
+    type: entity
+    table: quarters
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: type
+        type: string
+    discriminatorMap:
+        attendee_quarters: \Volleyball\Bundle\FacilityBundle\Entity\AttendeeQuarters
+        faculty_quarters: \Voleyball\Bundle\FacililtyBundle\Entity\FacultyQuarters
+        leader_quarters: \Volleyball\Bundle\FacilitlyBundle\Entity\LeaderQuarters
+        passel_quarters: \Volleyball\Bundle\FacilityBundle\Entity\PasselQuarters
+        quarters: \Volleyball\Bundle\FacililtyBundle\Entity\Quarters
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        description:
+            type: string
+            nullable: true
+        type:
+            type: string
+        capacity:
+            type: integer
+        createdAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: update
+        createdBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        updatedBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        slug:
+            type: string
+            gedmo:
+                slug:
+                    - name
+    manyToOne:
+        facility:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Facility
+            inversedBy: quarters
+            joinColumn:
+                name: quarters_id
+                referencedColumnName: id
+\Volleyball\Bundle\FacilityBundle\Entity\AttendeeQuarters:
+    type: entity
+\Volleyball\Bundle\FacilityBundle\Entity\FacultyQuarters:
+    type: entity
+\Volleyball\Bundle\FacilityBundle\Entity\LeaderQuarters:
+    type: entity
+\Volleyball\Bundle\FacilityBundle\Entity\PasselQuarters:
+    type: entity

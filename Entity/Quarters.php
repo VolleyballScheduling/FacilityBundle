@@ -1,27 +1,9 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use \Doctrine\ORM\Mapping as ORM;
-use \Gedmo\Mapping\Annotation as Gedmo;
-use \Symfony\Component\Validator\Constraints as Assert;
-
 use \Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
 use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="quarters")
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="kind", type="string")
- * @ORM\DiscriminatorMap(
- *      {
- *          "attendee_quarters" = "\Volleyball\Bundle\FacilityBundle\Entity\AttendeeQuarters",
- *          "faculty_quarters" = "\Volleyball\Bundle\FacilityBundle\Entity\FacultyQuarters",
- *          "passel_quarters" = "\Volleyball\Bundle\FacilityBundle\Entity\PasselQuarters",
- *          "quarters"  = "\Volleyball\Bundle\FacilityBundle\Entity\Quarters"
- *      }
- * )
- */
 class Quarters
 {
     use SluggableTrait;
@@ -34,37 +16,38 @@ class Quarters
     private $types = array();
     
     /**
-    * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue(strategy="AUTO")
-    */
+     * Id
+     * @var integer
+     */
     protected $id;
     
     /**
-    * @ORM\Column(type="string", length=150)
-    * @var type
-    */
+     * Name
+     * @var string
+     */
     protected $name;
     
     /**
-    * @ORM\Column(type="string", length=150)
-    * @var type
-    */
+     * Description
+     * @var string
+     */
     protected $description;
     
     /**
-     * @ORM\Column(type="string", length=100)
+     * Type
+     * @var string
      */
     protected $type;
     
     /**
-     * @ORM\Column(type="integer")
+     * Capacity
+     * @var integer
      */
     protected $capacity;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Facility", inversedBy="quarters")
-     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
+     * Facility
+     * @var \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     protected $facility;
 
@@ -73,7 +56,7 @@ class Quarters
      */
     public function __construct()
     {
-        $this->types = array('passel', 'faculty', 'attendee');
+        $this->types = array('attendee', 'faculty', 'leader', 'passel');
     }
     
     /**
@@ -87,7 +70,6 @@ class Quarters
 
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -96,7 +78,9 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Set name
+     * @param string $name
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Quarters
      */
     public function setName($name)
     {
@@ -106,7 +90,8 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Get name
+     * @return string
      */
     public function getName()
     {
@@ -114,7 +99,9 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Set type
+     * @param string $type
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Quarters|boolean
      */
     public function setType($type)
     {
@@ -128,7 +115,8 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Get type
+     * @return string
      */
     public function getType()
     {
@@ -136,7 +124,9 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Set capacity
+     * @param integer $capacity
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Quarters
      */
     public function setCapacity($capacity)
     {
@@ -146,7 +136,8 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Get capacity
+     * @return integer
      */
     public function getCapacity()
     {
@@ -154,7 +145,9 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Set facility
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Facility $facility
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Quarters
      */
     public function setFacility(\Volleyball\Bundle\FacilityBundle\Entity\Facility $facility)
     {
@@ -164,7 +157,8 @@ class Quarters
     }
 
     /**
-     * @inheritdoc
+     * Get facility
+     * @return type
      */
     public function getFacility()
     {
@@ -172,7 +166,8 @@ class Quarters
     }
     
     /**
-     * @inheritdoc
+     * Get description
+     * @return string
      */
     public function getDescription()
     {
@@ -180,7 +175,9 @@ class Quarters
     }
     
     /**
-     * @inheritdoc
+     * Set description
+     * @param string $description
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Quarters
      */
     public function setDescription($description)
     {
