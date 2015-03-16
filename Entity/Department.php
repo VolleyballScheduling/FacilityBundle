@@ -47,6 +47,12 @@ class Department
      */
     protected $facility;
     
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+        $this->parent = null;
+    }
+    
     /**
      * Get id
      * @return integer Id

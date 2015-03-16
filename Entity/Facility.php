@@ -1,9 +1,6 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use \Doctrine\ORM\Mapping as ORM;
-use \Gedmo\Mapping\Annotation as Gedmo;
-use \Symfony\Component\Validator\Constraints as Assert;
 use \Doctrine\Common\Collections\ArrayCollection;
 
 use \Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
@@ -19,69 +16,67 @@ class Facility
     use TimestampableTrait;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * Id
+     * @var integer
      */
     protected $id;
     
     /**
      * Name
-     * @var  string name
-     * @ORM\Column(name="name", type="string")
+     * @var string
      */
-    protected $name = '';
+    protected $name;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\UtilityBundle\Entity\Address", inversedBy="facility")
-     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
+     * Address
+     * @var \Volleyball\Bundle\CoreBundle\Entity\Address
      */
     protected $address;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Organization", inversedBy="facility")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
+     * Organization
+     * @var \Volleyball\Bundle\OrganizationBundle\Entity\Organization
      */
     protected $organization;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Council", inversedBy="facility")
-     * @ORM\JoinColumn(name="council_id", referencedColumnName="id")
+     * Council
+     * @var \Volleyball\Bundle\OrganizationBundle\Entity\Council
      */
     protected $council;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\OrganizationBundle\Entity\Region", inversedBy="facility")
-     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     * Region
+     * @var \Volleyball\Bundle\OrganizationBundle\Entity\Region
      */
     protected $region;
     
      /**
-     * @ORM\OneToMany(targetEntity="Faculty", mappedBy="facility")
-     */
+      * Faculty
+      * @var \Doctrine\Common\Collections\ArrayCollection
+      */
     protected $faculty;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Quarters", inversedBy="facility")
-     * @ORM\JoinColumn(name="quarters_id", referencedColumnName="id")
+     * Quarters
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $quarters;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Department", inversedBy="facility")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * Departments
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $departments;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\EnrollmentBundle\Entity\Season", inversedBy="facility")
-     * @ORM\JoinColumn(name="season_id", referencedColumnName="id")
+     * Season
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $seasons;
 
     /**
      * Get id
-     *
      * @return integer Id
      */
     public function getId()
@@ -90,7 +85,8 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get name
+     * @return string
      */
     public function getName()
     {
@@ -98,7 +94,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Set name
+     * @param string $name
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setName($name)
     {
@@ -108,7 +106,8 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get address
+     * @return \VolleyballBundle\CoreBundle\Entity\Address
      */
     public function getAddress()
     {
@@ -116,9 +115,11 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Set address
+     * @param \Volleyball\Bundle\CoreBundle\Entity\Address $address
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
-    public function setAddress(\Volleyball\Bundle\UtilityBundle\Entity\Address $address)
+    public function setAddress(\Volleyball\Bundle\CoreBundle\Entity\Address $address)
     {
         $this->address = $address;
 
@@ -126,7 +127,8 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get organization
+     * @return \Volleyball\Bundle\OrganizationBundle\Entity\Organization
      */
     public function getOrganization()
     {
@@ -134,7 +136,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Set organization
+     * @param \Volleyball\Bundle\OrganizationBundle\Entity\Organization $organization
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setOrganization(\Volleyball\Bundle\OrganizationBundle\Entity\Organization $organization)
     {
@@ -144,7 +148,8 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get council
+     * @return \Volleyball\Bundle\OrganizationBundle\Entity\Council
      */
     public function getCouncil()
     {
@@ -152,7 +157,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Set council
+     * @param \Volleyball\Bundle\OrganizationBundle\Entity\Council $council
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setCouncil(\Volleyball\Bundle\OrganizationBundle\Entity\Council $council)
     {
@@ -162,7 +169,8 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get reigon
+     * @return \Volleyball\Bundle\OrganizationBundle\Entity\Region
      */
     public function getRegion()
     {
@@ -170,7 +178,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Set region
+     * @param \Volleyball\Bundle\OrganizationBundle\Entity\Region $region
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setRegion(\Volleyball\Bundle\OrganizationBundle\Entity\Region $region)
     {
@@ -180,11 +190,13 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Set facility
+     * @param array $faculty
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setFaculty(array $faculty)
     {
-        if (! $faculty instanceof ArrayCollection) {
+        if (!$faculty instanceof ArrayCollection) {
             $faculty = new ArrayCollection($faculty);
         }
 
@@ -195,7 +207,6 @@ class Facility
 
     /**
      * Has faculty
-     *
      * @return boolean
      */
     public function hasFaculty()
@@ -204,7 +215,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get faculty
+     * @param string|null $faculty
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Volleyball\Bundle\FacilityBundle\Entity\Faculty
      */
     public function getFaculty($faculty = null)
     {
@@ -216,7 +229,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Add faculty
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Faculty $faculty
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function addFaculty(\Volleyball\Bundle\FacilityBundle\Entity\Faculty $faculty)
     {
@@ -226,28 +241,28 @@ class Facility
     }
 
     /**
-     * Remove a faculty
-     *
-     * @param Faculty|String $faculty faculty
-     *
-     * @return self
+     * Remove faculty
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Faculty $faculty
      */
-    public function removeFaculty($faculty)
+    public function removeFaculty(\Volleyball\Bundle\FacilityBundle\Entity\Faculty $faculty)
     {
         $this->faculty->remove($faculty);
-
-        return $this;
     }
 
     /**
-     * @inheritdoc
+     * Get quarters
+     * @param string|null $quarters
+     * @param string| $type
+     * @return \Doctrine\Common\Collections\ArrayCollection|\Volleyball\Bundle\FacilityBundle\Entity\Quarters
      */
     public function getQuarters($quarters = null, $type = null)
     {
+        // quarters specified
         if (null != $quarters) {
             return $this->quarters->get($quarters);
         }
         
+        // quarters type specified
         if (null != $type) {
             return $this->quarters->filter(
                 function($entry) use($type) {
@@ -260,7 +275,9 @@ class Facility
     }
     
     /**
-     * @inheritdoc
+     * Set quarters
+     * @param array $quarters
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setQuarters(array $quarters)
     {
@@ -274,17 +291,29 @@ class Facility
     }
     
     /**
-     * @inheritdoc
+     * Add quarters
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
-    public function addQuarters(Quarters $quarters)
+    public function addQuarters(\Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters)
     {
-        $this->quarters[] = $quarters;
+        $this->quarters->add($quarters);
         
         return $this;
     }
+    
+    /**
+     * Remove quarters
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters
+     */
+    public function removeQuarters(\Volleyball\Bundle\FacilityBundle\Entity\Quarters $quarters)
+    {
+        $this->quarters->remove($quarters);
+    }
 
     /**
-     * @inheritdoc
+     * Get departments
+     * @return \Doctrine\Common\Collecitons\ArrayCollection
      */
     public function getDepartments()
     {
@@ -292,7 +321,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Set departments
+     * @param array $departments
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setDepartments(array $departments)
     {
@@ -307,7 +338,6 @@ class Facility
 
     /**
      * Has departments
-     *
      * @return boolean
      */
     public function hasDepartments()
@@ -316,7 +346,9 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get department
+     * @param string $department
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
      */
     public function getDepartment($department)
     {
@@ -324,9 +356,11 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Add department
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Department $department
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
-    public function addDepartment(Department $department)
+    public function addDepartment(\Volleyball\Bundle\FacilityBundle\Entity\Department $department)
     {
         $this->departments->add($department);
 
@@ -334,17 +368,12 @@ class Facility
     }
 
     /**
-     * Remove a department
-     *
-     * @param Department|String $department department
-     *
-     * @return self
+     * Remove department
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Department $department
      */
-    public function removeDepartment($department)
+    public function removeDepartment(\Volleyball\Bundle\FacilityBundle\Entity\Department $department)
     {
         $this->departments->remove($department);
-
-        return $this;
     }
 
     /**
@@ -356,7 +385,18 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Get seasons
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getSeasons()
+    {
+        return $this->seasons;
+    }
+    
+    /**
+     * Set seasons
+     * @param array $seasons
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function setSeasons(array $seasons)
     {
@@ -371,16 +411,17 @@ class Facility
 
     /**
      * Has seasons
-     *
      * @return boolean
      */
     public function hasSeasons()
     {
         return !$this->seasons->isEmpty();
     }
-
+    
     /**
-     * @inheritdoc
+     * Get season
+     * @param string $season
+     * @return \Volleyball\Bundle\EnrollmentBundle\Entity\Season
      */
     public function getSeason($season)
     {
@@ -388,29 +429,24 @@ class Facility
     }
 
     /**
-     * @inheritdoc
+     * Add season
+     * @param \Volleyball\Bundle\EnrollmentBundle\Entity\Season $season
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function addSeason(\Volleyball\Bundle\EnrollmentBundle\Entity\Season $season)
     {
-        if (!in_array($season, $this->seasons)) {
-            $this->seasons[] = $season;
-        }
+        $this->seasons->add($season);
 
         return $this;
     }
 
     /**
-     * Remove a season
-     *
-     * @param Season|String $season season
-     *
-     * @return self
+     * Remove season
+     * @param \Volleyball\Bundle\EnrollmentBundle\Entity\Season $season
      */
-    public function removeSeason($season)
+    public function removeSeason(\Volleyball\Bundle\EnrollmentBundle\Entity\Season $season)
     {
         $this->seasons->remove($season);
-
-        return $this;
     }
 
     /**
@@ -419,5 +455,8 @@ class Facility
     public function __construct()
     {
         $this->faculty = new ArrayCollection();
+        $this->departments = new ArrayCollection();
+        $this->quarters = new ArrayCollection();
+        $this->seasons = new ArrayCollection();
     }
 }

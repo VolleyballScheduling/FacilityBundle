@@ -33,7 +33,7 @@
                 blameable:
                     on: create
         slug:
-            type: string
+            type: stringhttp://biolitestove.com/products/biolite-campstove
             gedmo:
                 slug:
                     - name
