@@ -1,58 +1,54 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use \Doctrine\ORM\Mapping as ORM;
-use \Gedmo\Mapping\Annotation as Gedmo;
-use \Symfony\Component\Validator\Constraints as Assert;
+use \Doctrine\Common\Collections\ArrayCollection;
 
 use \Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
 use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="department")
- */
 class Department
 {
     use SluggableTrait;
     use TimestampableTrait;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * Id
+     * @var integer
      */
     protected $id;
     
     /**
      * Name
-     * @var  string name
-     * @ORM\Column(name="name", type="string")
+     * @var string
      */
-    protected $name = '';
+    protected $name;
     
     /**
      * Description
      * @var string
-     * @ORM\Column(name="description", type="string")
      */
-    protected $description = '';
+    protected $description;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Department", inversedBy="department")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * Parent
+     * @var \Volleyball\Bundle\Facility\Bundle\Entity\Department
      */
-    protected $parent = null;
+    protected $parent;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Facility", inversedBy="department")
-     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
+     * Children
+     * @var array 
      */
-    protected $facility = '';
+    protected $children;
+    
+    /**
+     *
+     * @var \Volleyball\Bundle\FacilityBundle\Entity\Facility
+     */
+    protected $facility;
     
     /**
      * Get id
-     *
      * @return integer Id
      */
     public function getId()
@@ -61,7 +57,8 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Get name
+     * @return string
      */
     public function getName()
     {
@@ -69,7 +66,9 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Get name
+     * @param string $name
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
      */
     public function setName($name)
     {
@@ -79,7 +78,8 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Get description
+     * @return string
      */
     public function getDescription()
     {
@@ -87,7 +87,9 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Set description
+     * @param string $description
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
      */
     public function setDescription($description)
     {
@@ -97,7 +99,8 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Get parent
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
      */
     public function getParent()
     {
@@ -105,7 +108,9 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Set parent
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Department $parent
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
      */
     public function setParent(\Volleyball\Bundle\FacilityBundle\Entity\Department $parent)
     {
@@ -115,7 +120,8 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Get facility
+     * @return \Volleyball\Bundle\FacilityBUndle\Entity\Facility
      */
     public function getFacility()
     {
@@ -123,12 +129,89 @@ class Department
     }
 
     /**
-     * @inheritdoc
+     * Set facility
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Facility $facility
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
      */
     public function setFacility(\Volleyball\Bundle\FacilityBundle\Entity\Facility $facility)
     {
         $this->facility = $facility;
 
         return $this;
+    }
+    
+    /**
+     * Get children
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+    
+    /**
+     * Has children
+     * @return boolean
+     */
+    public function hasChildren()
+    {
+        return !$this->children->isEmpty();
+    }
+    
+    /**
+     * Set children
+     * @param array $children
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
+     */
+    public function setChildren(array $children)
+    {
+        if (!$children instanceof ArrayCollection) {
+            $children = new ArrayCollection($children);
+        }
+        
+        $this->children = $children;
+        
+        return $this;
+    }
+    
+    /**
+     * Get child
+     * @param string $child
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
+     */
+    public function getChild($child)
+    {
+        return $this->children->get($child);
+    }
+    
+    /**
+     * Has child
+     * @param string $child
+     * @return boolean
+     */
+    public function hasChild($child)
+    {
+        return $this->children->contains($child);
+    }
+    
+    /**
+     * Add child
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Department $child
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Department
+     */
+    public function addChild(\Volleyball\Bundle\FacilityBundle\Entity\Department $child)
+    {
+        $this->children->add($child);
+        
+        return $this;
+    }
+    
+    /**
+     * Remove child
+     * @param \VolleyballBundle\FacilityBundle\Entity\Department $child
+     */
+    public function removeChild(\VolleyballBundle\FacilityBundle\Entity\Department $child)
+    {
+        $this->children->remove($child);
     }
 }
