@@ -1,53 +1,42 @@
 <?php
 namespace Volleyball\Bundle\FacilityBundle\Entity;
 
-use \Doctrine\ORM\Mapping as ORM;
-use \Gedmo\Mapping\Annotation as Gedmo;
-use \Symfony\Component\Validator\Constraints as Assert;
 use \Doctrine\Common\Collections\ArrayCollection;
 
 use \Volleyball\Bundle\UtilityBundle\Traits\SluggableTrait;
 use \Volleyball\Bundle\UtilityBundle\Traits\TimestampableTrait;
 
-/**
- * @ORM\Table(name="facility_position")
- * @ORM\Entity(repositoryClass="Volleyball\Bundle\FacilityBundle\Repository\PositionRepository")
- */
 class Position
 {
     use SluggableTrait;
     use TimestampableTrait;
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * Id
+     * @var integer
      */
     protected $id;
-
+    
     /**
      * Name
-     * @var  string name
-     * @ORM\Column(name="name", type="string")
+     * @var string
      */
-    protected $name = '';
+    protected $name;
     
     /**
      * Description
      * @var string
-     * @ORM\Column(name="description", type="string")
      */
-    protected $description = '';
+    protected $description;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Volleyball\Bundle\FacilityBundle\Entity\Facility", inversedBy="facility_positionspositions")
-     * @ORM\JoinColumn(name="facility_id", referencedColumnName="id")
+     * Facility
+     * @var \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
-    protected $facility = '';
+    protected $facility;
     
     /**
      * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -56,7 +45,8 @@ class Position
     }
 
     /**
-     * @inheritdoc
+     * Get name
+     * @return string
      */
     public function getName()
     {
@@ -64,7 +54,9 @@ class Position
     }
 
     /**
-     * @inheritdoc
+     * Set name
+     * @param string $name
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Position
      */
     public function setName($name)
     {
@@ -74,7 +66,8 @@ class Position
     }
 
     /**
-     * @inheritdoc
+     * Get description
+     * @return string
      */
     public function getDescription()
     {
@@ -82,7 +75,9 @@ class Position
     }
 
     /**
-     * @inheritdoc
+     * Set description
+     * @param string $description
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Position
      */
     public function setDescription($description)
     {
@@ -92,7 +87,8 @@ class Position
     }
 
     /**
-     * @inheritdoc
+     * Get facility
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Facility
      */
     public function getFacility()
     {
@@ -100,7 +96,9 @@ class Position
     }
 
     /**
-     * @inheritdoc
+     * Set facility
+     * @param \Volleyball\Bundle\FacilityBundle\Entity\Facility $facility
+     * @return \Volleyball\Bundle\FacilityBundle\Entity\Position
      */
     public function setFacility(\Volleyball\Bundle\FacilityBundle\Entity\Facility $facility)
     {

@@ -1,0 +1,65 @@
+\Volleyball\Bundle\FacilityBundle\Entity\Faculty:
+    type: entity
+    fields:
+        admin:
+            type: boolean
+            nullable: true
+    manyToOne:
+        position:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Position
+            inversedBy: faculty
+            joinColumn:
+                name: position_id
+                referencedColumnName: id
+        enrollments:
+            targetEntity: \Volleyball\Bundle\EnrollmentBundle\Entity\FacultyEnrollment
+            inversedBy: faculty
+            joinColumn:
+                name: enrollment_id
+                referencedColumnName: id
+\Volleyball\Bundle\FacilityBundle\Entity\Position:
+    type: entity
+    table: faculty_position
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        description:
+            type: string
+            nullable: true
+        createdAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: update
+        createdBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        updatedBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        slug:
+            type: string
+            gedmo:
+                slug:
+                    - name
+    ManyToOne:
+        facility:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Facility
+            inversedBy: faculty_position
+            joinColumn:
+                name: facility_id
+                referencedColumnName: id
