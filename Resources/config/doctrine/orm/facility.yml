@@ -1,0 +1,65 @@
+Volleyball\Bundle\FacilityBundle\Entity\Facility:
+    type: entity
+    table: facility
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        description:
+            type: string
+            nullable: true
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        slug:
+            type: string
+            gedmo:
+                slug:
+                    fields:
+                        - name
+    ManyToOne:
+        organization:
+            targetEntity: Volleyball\Bundle\OrganizationBundle\Entity\Organization
+            inversedBy: facility
+            joinColumn:
+                name: organization_id
+                referencedColumnName: id
+        council:
+            targetEntity: Volleyball\Bundle\OrganizationBundle\Entity\Council
+            inversedBy: facility
+            joinColumn:
+                name: council_id
+                referencedColumnName: id
+        region:
+            targetEntity: Volleyball\Bundle\OrganizationBundle\Entity\Region
+            inversedBy: facility
+            joinColumn:
+                name: region_id
+                referencedColumnName: id
+    OneToMany:
+        faculty:
+            targetEntity: Volleyball\Bundle\FacilityBundle\Entity\Faculty
+            mappedBy: facility
+        departments:
+            targetEntity: Volleyball\Bundle\FacilityBundle\Entity\Department
+            mappedBy: facility
+        quarters:
+            targetEntity: Volleyball\Bundle\FacilityBundle\Entity\Quarters
+            mappedBy: facility
+        seasons:
+            targetEntity: Volleyball\Bundle\EnrollmentBundle\Entity\Season
+            mappedBy: facility
+        enrollments:
+            targetEntity: Volleyball\Bundle\EnrollmentBundle\Entity\FacilityEnrollment
+            mappedBy: facility

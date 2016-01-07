@@ -1,0 +1,39 @@
+# Quarters
+vb_quarters_index:
+    path: /
+    host: quarters.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Quarters:index
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_quarters_index_by_organization:
+    path: /{slug}/quarters/{q_type}
+    host: facilities.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Quarters:index
+        page: 1
+        q_type: all
+    requirements:
+        q_type: +s
+        page: \d+
+        slug: +s
+        domain: %domain%
+vb_quarters_show:
+    path: /{slug}
+    host: quarters.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Quarters:show
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_quarters_edit:
+    path: /{slug}/edit
+    host: quarters.{domain}
+    defaults: { _controller: VolleyballFacilityBundle:Quarters:edit }
+    requirements:
+        slug: +s
+        domain: %domain%
+

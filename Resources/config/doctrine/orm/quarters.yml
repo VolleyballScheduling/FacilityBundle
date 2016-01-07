@@ -1,0 +1,47 @@
+Volleyball\Bundle\PasselBundle\Entity\Quarters:
+    type: entity
+    table: quarters
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name: string
+        description:
+            type: string
+            nullable: true
+        type:
+            type: enum
+            values: ['passel', 'faculty', 'leader', 'attendee']
+        status:
+            type: enum
+            values: ['active', 'inactive', 'retired']
+        capacity: integer
+        createdAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        slug:
+            type: string
+            gedmo:
+                slug:
+                    fields:
+                        - name
+    ManyToOne:
+        facility:
+            targetEntity: Volleyball\Bundle\FacilityBundle\Entity\Facility
+            inversedBy: passel_type
+            joinColumn:
+                name: quarters_id
+                referencedColumnName: id
+    OneToMany:
+        occupants:
+            targetEntity: Volleyball\Bundle\UserBundle\Entity\User
+            mappedBy: quarters

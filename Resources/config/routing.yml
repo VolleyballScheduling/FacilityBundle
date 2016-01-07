@@ -1,0 +1,58 @@
+# Facility Bundle
+'Volleyball:Facilities':
+    host: facilities.{domain}
+    defaults:
+        _resources:
+            "facilities": {service: "volleyball.repository.facility", method: "findAll"}
+            "facility": {service: "volleyball.repository.facility", method: "find", arguments: [name: "id"]}
+            "session": {service: "service_container", method: "get", arguments: [value: "session"]}
+    requirements:
+        domain: %domain%
+'Volleyball:Departments':
+    host: departments.{domain}
+    defaults:
+        _resources:
+            "departments": {service: "volleyball.repository.department", method: "findAll"}
+            "department": {service: "volleyball.repository.department", method: "find", arguments: [name: "id"]}
+            "session": {service: "service_container", method: "get", arguments: [value: "session"]}
+    requirements:
+        domain: %domain%
+'Volleyball:Quarters':
+    host: quarters.{domain}
+    defaults:
+        _resources:
+            "quarterss": {service: "volleyball.repository.quarters", method: "findAll"}
+            "quarters": {service: "volleyball.repository.quarters", method: "find", arguments: [name: "id"]}
+            "session": {service: "service_container", method: "get", arguments: [value: "session"]}
+    requirements:
+        domain: %domain%
+'Volleyball:Faculty':
+    host: faculty.{domain}
+    defaults:
+        _resources:
+            "facultys": {service: "volleyball.repository.faculty", method: "findAll"}
+            "faculty": {service: "volleyball.repository.faculty", method: "find", arguments: [name: "id"]}
+            "session": {service: "service_container", method: "get", arguments: [value: "session"]}
+    requirements:
+        domain: %domain%
+'Volleyball:FacultyPositions':
+    host: faculty.{domain}
+    path: /positions/
+    defaults:
+        _resources:
+            "faculty_positions": {service: "volleyball.repository.faculty_position", method: "findAll"}
+            "faculty_position": {service: "volleyball.repository.faculty_position", method: "find", arguments: [name: "id"]}
+            "session": {service: "service_container", method: "get", arguments: [value: "session"]}
+    requirements:
+        domain: %domain%
+
+facility:
+    resource: "@VolleyballFacilityBundle/Resources/config/routing/facility.yml"
+quarters:
+    resource: "@VolleyballFacilityBundle/Resources/config/routing/quarters.yml"
+faculty:
+    resource: "@VolleyballFacilityBundle/Resources/config/routing/faculty.yml"
+position:
+    resource: "@VolleyballFacilityBundle/Resources/config/routing/position.yml"
+department:
+    resource: "@VolleyballFacilityBundle/Resources/config/routing/department.yml"

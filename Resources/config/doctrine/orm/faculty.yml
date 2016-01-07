@@ -1,0 +1,20 @@
+Volleyball\Bundle\FacilityBundle\Entity\Faculty:
+    type: entity
+    table: faculty
+    manyToOne:
+        facility:
+            targetEntity: Volleyball\Bundle\FacilityBundle\Entity\Facility
+            inversedBy: faculty
+            joinColumn:
+                name: facility_id
+                referencedColumnName: id
+        position:
+            targetEntity: Volleyball\Bundle\FacilityBundle\Entity\Position
+            inversedBy: faculty
+            joinColumn:
+                name: position_id
+                referencedColumnName: id
+    oneToMany:
+        enrollments:
+            targetEntity: Volleyball\Bundle\EnrollmentBundle\Entity\FacultyEnrollment
+            mappedBy: faculty

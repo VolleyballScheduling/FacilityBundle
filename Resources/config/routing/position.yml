@@ -1,0 +1,37 @@
+# Position
+vb_position_index:
+    path: /
+    host: positions.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Position:index
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_position_index_by_facility:
+    path: /{slug}/positions
+    host: facilities.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Position:index
+        page: 1
+    requirements:
+        page: \d+
+        slug: +s
+        domain: %domain%
+vb_position_show:
+    path: /{slug}
+    host: positions.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Position:show
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_position_edit:
+    path: /{slug}/edit
+    host: positions.{domain}
+    defaults: { _controller: VolleyballFacilityBundle:Position:edit }
+    requirements:
+        slug: +s
+        domain: %domain%
+

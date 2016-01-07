@@ -1,0 +1,37 @@
+# Department
+vb_department_index:
+    path: /
+    host: departments.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Department:index
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_department_index_by_facility:
+    path: /{slug}/departments
+    host: facilities.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Department:index
+        page: 1
+    requirements:
+        page: \d+
+        slug: +s
+        domain: %domain%
+vb_department_show:
+    path: /{slug}
+    host: departments.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Department:show
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_department_edit:
+    path: /{slug}/edit
+    host: departments.{domain}
+    defaults: { _controller: VolleyballFacilityBundle:Department:edit }
+    requirements:
+        slug: +s
+        domain: %domain%
+

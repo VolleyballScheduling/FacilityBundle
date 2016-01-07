@@ -1,0 +1,37 @@
+# Faculty
+vb_faculty_index:
+    path: /
+    host: faculty.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Faculty:index
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_faculty_index_by_facility:
+    path: /{slug}/facultys
+    host: facilities.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Faculty:index
+        page: 1
+    requirements:
+        page: \d+
+        slug: +s
+        domain: %domain%
+vb_faculty_show:
+    path: /{slug}
+    host: faculty.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Faculty:show
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_faculty_edit:
+    path: /{slug}/edit
+    host: faculty.{domain}
+    defaults: { _controller: VolleyballFacilityBundle:Faculty:edit }
+    requirements:
+        slug: +s
+        domain: %domain%
+

@@ -1,0 +1,37 @@
+# Facility
+vb_facility_index:
+    path: /
+    host: facilities.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Facility:index
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_facility_index_by_organization:
+    path: /{slug}/facilities
+    host: organizations.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Facility:index
+        page: 1
+    requirements:
+        page: \d+
+        slug: +s
+        domain: %domain%
+vb_facility_show:
+    path: /{slug}
+    host: facilities.{domain}
+    defaults:
+        _controller: VolleyballFacilityBundle:Facility:show
+        page: 1
+    requirements:
+        page: \d+
+        domain: %domain%
+vb_facility_edit:
+    path: /{slug}/edit
+    host: facilities.{domain}
+    defaults: { _controller: VolleyballFacilityBundle:Facility:edit }
+    requirements:
+        slug: +s
+        domain: %domain%
+
