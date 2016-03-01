@@ -9,6 +9,7 @@ class Configuration implements \Symfony\Component\Config\Definition\Configuratio
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new \Symfony\Component\Config\Definition\Builder\TreeBuilder();
+
         $rootNode = $treeBuilder->root('volleyball_facility');
 
         return $treeBuilder;

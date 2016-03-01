@@ -58,6 +58,4 @@ class QuartersController extends \Volleyball\Bundle\UtilityBundle\Controller\Con
     {
         return ['quarters' => $quarters];
     }
-
-
 }

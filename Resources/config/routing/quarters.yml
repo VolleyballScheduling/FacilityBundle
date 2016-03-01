@@ -36,4 +36,3 @@ vb_quarters_edit:
     requirements:
         slug: +s
         domain: %domain%
-

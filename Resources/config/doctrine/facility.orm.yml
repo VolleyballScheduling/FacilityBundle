@@ -1,0 +1,80 @@
+\Volleyball\Bundle\FacilityBundle\Entity\Department:
+    type: entity
+    table: facility
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        description:
+            type: string
+            nullable: true
+        createdAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: update
+        createdBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        updatedBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        slug:
+            type: stringhttp://biolitestove.com/products/biolite-campstove
+            gedmo:
+                slug:
+                    - name
+    manyToOne:
+        address:
+            targetEntity: \Volleyball\Bundle\CoreBundle\Entity\Address
+            inversedBy: facility
+            joinColumn:
+                name: address_id
+                referencedColumnName: id
+        organization:
+            targetEntity: \VolleyballBundle\OrganizationBundle\Entity\Organization
+            inversedBy: facility
+            joinColumn:
+                name: organization_id
+                referencedColumnName: id
+        council:
+            targetEntity: \VolleyballBundle\OrganizationBundle\Entity\Council
+            inversedBy: facility
+            joinColumn:
+                name: council_id
+                referencedColumnName: id
+        region:
+            targetEntity: \VolleyballBundle\OrganizationBundle\Entity\Region
+            inversedBy: facility
+            joinColumn:
+                name: region_id
+                referencedColumnName: id
+    oneToMany:
+        faculty:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Faculty
+            mappedBy: facility
+        quarters:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Quarters
+            mappedBy: facility
+        departments:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Department
+            mappedBy: facility
+        seasons:
+            targetEntity: \Volleyball\Bundle\EnrollmentBundle\Entity\Season
+            mappedBy: facility
+        courses:
+            targetEntity: \Volleyball\Bundle\CourseBundle\Entity\FacilityCourse
+            mappedBy: facility

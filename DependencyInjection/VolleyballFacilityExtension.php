@@ -17,6 +17,7 @@ class VolleyballFacilityExtension extends \Symfony\Component\HttpKernel\Dependen
             $container,
             new \Symfony\Component\Config\FileLocator(__DIR__.'/../Resources/config')
         );
+
         $loader->load('services.yml');
     }
 }

@@ -1,0 +1,56 @@
+\Volleyball\Bundle\FacilityBundle\Entity\Department:
+    type: entity
+    table: department
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+        description:
+            type: string
+            nullable: true
+        createdAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: date
+            gedmo:
+                timestampable:
+                    on: update
+        createdBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        updatedBy:
+            type: string
+            gedmo:
+                blameable:
+                    on: create
+        slug:
+            type: stringhttp://biolitestove.com/products/biolite-campstove
+            gedmo:
+                slug:
+                    - name
+    manyToOne:
+        parent:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Department
+            inversedBy: department
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id
+        facility:
+            targetEntity: \Volleyball\Bundle\FacililtyBundle\Entity\Facililty
+            inversedBy: facility
+            joinColumn:
+                name: facility_id
+                referencedColumnName: id
+    oneToMany:
+        children:
+            targetEntity: \Volleyball\Bundle\FacilityBundle\Entity\Department
+            mappedBy: department

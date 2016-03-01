@@ -58,6 +58,4 @@ class FacultyController extends \Volleyball\Bundle\UtilityBundle\Controller\Cont
     {
         return ['faculty' => $faculty];
     }
-
-
 }

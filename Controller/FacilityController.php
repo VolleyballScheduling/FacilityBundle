@@ -58,6 +58,4 @@ class FacilityController extends \Volleyball\Bundle\UtilityBundle\Controller\Con
     {
         return ['facility' => $facility];
     }
-
-
 }

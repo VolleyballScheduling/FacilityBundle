@@ -34,4 +34,3 @@ vb_faculty_edit:
     requirements:
         slug: +s
         domain: %domain%
-

@@ -58,6 +58,4 @@ class DepartmentController extends \Volleyball\Bundle\UtilityBundle\Controller\C
     {
         return ['department' => $department];
     }
-
-
 }
