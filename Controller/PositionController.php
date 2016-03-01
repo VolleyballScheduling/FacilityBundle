@@ -25,7 +25,7 @@ class PositionController extends \Volleyball\Bundle\UtilityBundle\Controller\Con
             $this->persist($position, true);
             $this->addFlash('position created');
 
-            return $this->redirectToRoute('volleyball_positions_index');
+            return $this->redirectToRoute('volleyball_faculty_positions_index');
         }
 
         return ['form' => $form->createView()];

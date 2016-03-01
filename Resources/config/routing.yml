@@ -46,13 +46,13 @@
     requirements:
         domain: %domain%
 
-facility:
-    resource: "@VolleyballFacilityBundle/Resources/config/routing/facility.yml"
-quarters:
-    resource: "@VolleyballFacilityBundle/Resources/config/routing/quarters.yml"
-faculty:
-    resource: "@VolleyballFacilityBundle/Resources/config/routing/faculty.yml"
-position:
-    resource: "@VolleyballFacilityBundle/Resources/config/routing/position.yml"
-department:
-    resource: "@VolleyballFacilityBundle/Resources/config/routing/department.yml"
+# facility:
+#     resource: "@VolleyballFacilityBundle/Resources/config/routing/facility.yml"
+# quarters:
+#     resource: "@VolleyballFacilityBundle/Resources/config/routing/quarters.yml"
+# faculty:
+#     resource: "@VolleyballFacilityBundle/Resources/config/routing/faculty.yml"
+# position:
+#     resource: "@VolleyballFacilityBundle/Resources/config/routing/position.yml"
+# department:
+#     resource: "@VolleyballFacilityBundle/Resources/config/routing/department.yml"
